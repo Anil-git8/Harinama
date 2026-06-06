@@ -154,6 +154,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+// ===== KIRTANS FILTER BUTTONS =====
+function initKirtansFilter() {
+  const filterButtons = document.querySelectorAll('.round-options .round-btn');
+  const kirtanSections = document.querySelectorAll('[data-kirtan-filter]');
+  if (!filterButtons.length || !kirtanSections.length) return;
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      filterButtons.forEach(btn => btn.classList.toggle('active', btn === button));
+
+      kirtanSections.forEach(section => {
+        section.hidden = filter !== 'all' && section.dataset.kirtanFilter !== filter;
+      });
+    });
+  });
+}
+
+initKirtansFilter();
+
 // ===== ACTIVE NAV LINK =====
 const currentPage = window.location.pathname.split('/').pop() || 'index.html';
 document.querySelectorAll('.nav-link').forEach(link => {
