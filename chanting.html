@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Digital japa experience – chant the Maha Mantra with a beautiful interactive counter.">
+  <title>Start Chanting – Feel Harinam</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .chanting-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gradient-warm);
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .chanting-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124, 77, 255, 0.08), transparent);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .mega-circle {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      margin: 0 auto 40px;
+      background: var(--white);
+      border: 2px solid var(--violet-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+      box-shadow: var(--shadow-lg);
+    }
+    .mega-circle:hover {
+      border-color: var(--violet-400);
+      box-shadow: 0 0 80px rgba(124, 77, 255, 0.15);
+    }
+    .mega-circle:active { transform: scale(0.96); }
+    .mega-circle .counter {
+      font-family: var(--font-heading);
+      font-size: 5rem;
+      color: var(--violet-600);
+      line-height: 1;
+      font-weight: 300;
+    }
+    .mega-circle .counter-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 8px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .mega-circle .ring1 {
+      position: absolute;
+      inset: -15px;
+      border-radius: 50%;
+      border: 1px solid rgba(124, 77, 255, 0.15);
+      animation: pulseRing 3s ease-in-out infinite;
+    }
+    .mega-circle .ring2 {
+      position: absolute;
+      inset: -30px;
+      border-radius: 50%;
+      border: 1px solid rgba(124, 77, 255, 0.08);
+      animation: pulseRing 3.5s ease-in-out infinite 0.5s;
+    }
+    .breathing-guide {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 77, 255, 0.1), transparent);
+      margin: 0 auto 24px;
+      animation: breathe 5s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .breathing-guide span {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .stats-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 32px 0;
+    }
+    .stat-item {
+      text-align: center;
+      padding: 16px 28px;
+      background: var(--white);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      min-width: 110px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-item .stat-num {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--violet-600);
+      font-weight: 300;
+    }
+    .stat-item .stat-label {
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .mantra-display {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: var(--text-secondary);
+      text-align: center;
+      margin: 28px 0;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+    .mode-cards {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 32px 0;
+    }
+    .mode-card {
+      padding: 20px 28px;
+      background: var(--white);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+      min-width: 130px;
+      box-shadow: var(--shadow-sm);
+    }
+    .mode-card:hover, .mode-card.active {
+      border-color: var(--violet-400);
+      background: var(--violet-50);
+      box-shadow: var(--shadow-md);
+    }
+    .mode-card .mode-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto 8px;
+    }
+    .mode-card .mode-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .mode-card .mode-name { color: var(--text-primary); font-size: 0.88rem; font-weight: 400; }
+    .mode-card .mode-desc { color: var(--text-muted); font-size: 0.72rem; margin-top: 4px; }
+    @media(max-width: 767px) {
+      .mega-circle { width: 230px; height: 230px; }
+      .mega-circle .counter { font-size: 3.5rem; }
+      .stat-item { padding: 12px 18px; min-width: 90px; }
+      .stat-item .stat-num { font-size: 1.4rem; }
+      .mode-card { padding: 14px 18px; min-width: 100px; }
+    }
+    @media(max-width: 480px) {
+      .mega-circle { width: 190px; height: 190px; }
+      .mega-circle .counter { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <img src="images/logo.jpg" alt="Loading Logo" class="preloader-logo">
+    <div class="preloader-spinner"></div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-custom scrolled" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/logo.jpg" alt="Feel Harinam Logo" class="brand-logo me-2">
+      Feel <span>Harinam</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="offcanvas offcanvas-end" id="navMenu">
+      <div class="offcanvas-header"><h5 class="offcanvas-title">Feel Harinam</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+      <div class="offcanvas-body"><ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="kirtans.html">Kirtans</a></li>
+        <li class="nav-item"><a class="nav-link active" href="chanting.html">Chanting</a></li>
+        <li class="nav-item"><a class="nav-link" href="stories.html">Stories</a></li>
+        <li class="nav-item"><a class="nav-link" href="community.html">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+  </div>
+</nav>
+
+<section class="chanting-hero">
+  <div class="container text-center">
+    <div class="breathing-guide" data-aos="fade-up">
+      <span>Breathe</span>
+    </div>
+
+    <div class="mega-circle" id="chantCircle" onclick="incrementChant()" data-aos="fade-up" data-aos-delay="200">
+      <div class="ring1"></div>
+      <div class="ring2"></div>
+      <div class="counter" id="chantCount">0</div>
+      <div class="counter-label">Mantras</div>
+    </div>
+
+    <div class="mantra-display" data-aos="fade-up" data-aos-delay="300">
+      Hare Krishna Hare Krishna · Krishna Krishna Hare Hare<br>
+      Hare Rama Hare Rama · Rama Rama Hare Hare
+    </div>
+
+    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:8px;" data-aos="fade-up" data-aos-delay="400">Tap the circle for each mantra</p>
+
+    <div class="stats-row" data-aos="fade-up" data-aos-delay="500">
+      <div class="stat-item">
+        <div class="stat-num" id="roundNum">0</div>
+        <div class="stat-label">Rounds</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="remainCount">1728</div>
+        <div class="stat-label">Remaining</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="timeSpent">0:00</div>
+        <div class="stat-label">Time</div>
+      </div>
+    </div>
+
+    <h4 style="color:var(--text-primary);font-family:var(--font-heading);margin:36px 0 16px;font-weight:300;" data-aos="fade-up" data-aos-delay="600">Choose Your Practice</h4>
+    <div class="round-options" data-aos="fade-up" data-aos-delay="700">
+      <button class="round-btn" onclick="setRoundsPage(1)">1 Round</button>
+      <button class="round-btn" onclick="setRoundsPage(4)">4 Rounds</button>
+      <button class="round-btn" onclick="setRoundsPage(8)">8 Rounds</button>
+      <button class="round-btn" onclick="setRoundsPage(12)">12 Rounds</button>
+      <button class="round-btn active" onclick="setRoundsPage(16)">16 Rounds</button>
+    </div>
+
+    <h4 style="color:var(--text-primary);font-family:var(--font-heading);margin:48px 0 16px;font-weight:300;" data-aos="fade-up">Chanting Modes</h4>
+    <div class="mode-cards" data-aos="fade-up">
+      <div class="mode-card active">
+        <div class="mode-icon"><img src="images/prayer_hands.png" alt="Free Chant"></div>
+        <div class="mode-name">Free Chant</div>
+        <div class="mode-desc">Your own pace</div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon"><img src="images/meditation_pose.png" alt="Guided"></div>
+        <div class="mode-name">Guided</div>
+        <div class="mode-desc">With breathing</div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon"><img src="images/sunrise_river.png" alt="Timed"></div>
+        <div class="mode-name">Timed</div>
+        <div class="mode-desc">Set duration</div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-icon"><img src="images/divine_sparkle.png" alt="Meditation"></div>
+        <div class="mode-name">Meditation</div>
+        <div class="mode-desc">Deep focus</div>
+      </div>
+    </div>
+
+    <button class="btn-golden mt-4" onclick="resetChant()" data-aos="fade-up">
+      <i class="fas fa-redo"></i> Reset Counter
+    </button>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4"><h5>Feel Harinam</h5><p>A living kirtan experience for the heart.</p></div>
+      <div class="col-md-2"><h5>Explore</h5><ul class="footer-links"><li><a href="kirtans.html">Kirtans</a></li><li><a href="chanting.html">Chanting</a></li><li><a href="stories.html">Stories</a></li></ul></div>
+      <div class="col-md-3"><h5>Connect</h5><ul class="footer-links"><li><a href="community.html">Community</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-md-3"><h5>Follow Us</h5><div class="d-flex gap-3 mt-2"><a href="#" style="font-size:1.2rem"><i class="fab fa-instagram"></i></a><a href="#" style="font-size:1.2rem"><i class="fab fa-youtube"></i></a></div></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Feel Harinam. Made with devotion for Krishna.</p></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // Enhanced chanting for this page
+  let pageChantCount = 0;
+  let pageTargetRounds = 16;
+  let startTime = null;
+  let timerInterval = null;
+
+  function incrementChant() {
+    pageChantCount++;
+    if (!startTime) { startTime = Date.now(); startTimer(); }
+    document.getElementById('chantCount').textContent = pageChantCount;
+    document.getElementById('roundNum').textContent = Math.floor(pageChantCount / 108);
+    document.getElementById('remainCount').textContent = Math.max(0, (pageTargetRounds * 108) - pageChantCount);
+
+    const circle = document.getElementById('chantCircle');
+    circle.style.borderColor = 'var(--violet-400)';
+    circle.style.boxShadow = '0 0 80px rgba(124, 77, 255, 0.2)';
+    setTimeout(() => { circle.style.borderColor = 'var(--violet-300)'; circle.style.boxShadow = 'var(--shadow-lg)'; }, 300);
+
+    if (pageChantCount >= pageTargetRounds * 108) {
+      circle.style.background = 'radial-gradient(circle, rgba(124, 77, 255, 0.1), var(--white))';
+    }
+  }
+
+  function setRoundsPage(n) {
+    pageTargetRounds = n;
+    resetChant();
+    document.querySelectorAll('.round-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  function resetChant() {
+    pageChantCount = 0; startTime = null;
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('chantCount').textContent = '0';
+    document.getElementById('roundNum').textContent = '0';
+    document.getElementById('remainCount').textContent = pageTargetRounds * 108;
+    document.getElementById('timeSpent').textContent = '0:00';
+  }
+
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = elapsed % 60;
+      document.getElementById('timeSpent').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    }, 1000);
+  }
+
+  // Mode card selection
+  document.querySelectorAll('.mode-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

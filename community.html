@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join the worldwide Harinam movement – Connect on WhatsApp, Telegram, YouTube and more.">
+  <title>Community – Feel Harinam</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .community-hero {
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--gradient-hero);
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .community-hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(124, 77, 255, 0.08), transparent);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .big-community-card {
+      padding: 48px 36px;
+      background: var(--white);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-lg);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .big-community-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--violet-500);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    .big-community-card:hover::before { transform: scaleX(1); }
+    .big-community-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .big-community-card .big-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--violet-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--violet-500);
+      margin: 0 auto 24px;
+      transition: var(--transition);
+    }
+    .big-community-card:hover .big-icon { background: var(--violet-500); color: var(--white); }
+    .big-community-card h3 { font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 12px; }
+    .big-community-card p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.92rem; font-weight: 300; }
+    .stat-banner {
+      background: var(--white);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--border-radius-lg);
+      padding: 40px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .stat-banner .stat { text-align: center; }
+    .stat-banner .stat-number { font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); font-weight: 400; }
+    .stat-banner .stat-text { color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 400; }
+  </style>
+</head>
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <img src="images/logo.jpg" alt="Loading Logo" class="preloader-logo">
+    <div class="preloader-spinner"></div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg navbar-custom scrolled" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/logo.jpg" alt="Feel Harinam Logo" class="brand-logo me-2">
+      Feel <span>Harinam</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navMenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="offcanvas offcanvas-end" id="navMenu">
+      <div class="offcanvas-header"><h5 class="offcanvas-title">Feel Harinam</h5><button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button></div>
+      <div class="offcanvas-body"><ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="kirtans.html">Kirtans</a></li>
+        <li class="nav-item"><a class="nav-link" href="chanting.html">Chanting</a></li>
+        <li class="nav-item"><a class="nav-link" href="stories.html">Stories</a></li>
+        <li class="nav-item"><a class="nav-link active" href="community.html">Community</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul></div>
+    </div>
+  </div>
+</nav>
+
+<section class="community-hero">
+  <div class="container">
+    <img src="images/globe_community.png" alt="Globe Community" style="width:72px;height:72px;object-fit:cover;border-radius:50%;margin-bottom:16px;" data-aos="fade-up">
+    <h1 data-aos="fade-up" data-aos-delay="200" style="color:var(--text-primary);margin:20px 0;font-weight:300;">Join the Worldwide<br><span style="color:var(--violet-500);font-style:italic;">Harinam Movement</span></h1>
+    <p style="color:var(--text-muted);font-size:1.05rem;max-width:520px;margin:0 auto;font-weight:300;" data-aos="fade-up" data-aos-delay="400">Connect with thousands of devotees across the globe. Chant together. Grow together.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding:60px 0;">
+  <div class="container">
+    <div class="stat-banner" data-aos="fade-up">
+      <div class="stat"><div class="stat-number">10K+</div><div class="stat-text">Community Members</div></div>
+      <div class="stat"><div class="stat-number">50+</div><div class="stat-text">Countries</div></div>
+      <div class="stat"><div class="stat-number">1M+</div><div class="stat-text">Mantras Chanted</div></div>
+      <div class="stat"><div class="stat-number">500+</div><div class="stat-text">Kirtans Shared</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY CHANNELS -->
+<section class="section-padding">
+  <div class="container">
+    <div class="section-title" data-aos="fade-up">
+      <h2>Connect With Us</h2>
+      <div class="divider"></div>
+      <p>Choose your preferred platform and join the family.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+        <div class="big-community-card">
+          <div class="big-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>WhatsApp</h3>
+          <p>Daily mantra reminders, kirtan updates, and spiritual inspiration delivered to your phone.</p>
+          <a href="#" class="btn-golden" style="padding:12px 28px;font-size:0.85rem;">Join Group <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+        <div class="big-community-card">
+          <div class="big-icon"><i class="fab fa-telegram"></i></div>
+          <h3>Telegram</h3>
+          <p>Join our kirtan channel for exclusive audio, live sessions, and devotee discussions.</p>
+          <a href="#" class="btn-golden" style="padding:12px 28px;font-size:0.85rem;">Join Channel <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+        <div class="big-community-card">
+          <div class="big-icon"><i class="fab fa-youtube"></i></div>
+          <h3>YouTube</h3>
+          <p>Watch live kirtans, Krishna stories, and spiritual vlogs from Vrindavan and around the world.</p>
+          <a href="#" class="btn-golden" style="padding:12px 28px;font-size:0.85rem;">Subscribe <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+        <div class="big-community-card">
+          <div class="big-icon"><i class="fas fa-envelope"></i></div>
+          <h3>Newsletter</h3>
+          <p>Weekly curated spiritual content – kirtans, stories, and wisdom directly to your inbox.</p>
+          <a href="#" class="btn-golden" style="padding:12px 28px;font-size:0.85rem;">Subscribe <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="section-padding" style="background:var(--gray-100)">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8" data-aos="fade-up">
+        <div class="glass-card text-center" style="padding:56px 40px;">
+          <h2 style="font-family:var(--font-heading);color:var(--text-primary);margin:0 0 16px;font-weight:300;">Stay Connected</h2>
+          <p style="color:var(--text-muted);margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto;font-weight:300;">Get weekly kirtan recommendations, spiritual stories, and chanting inspiration delivered with love.</p>
+          <form class="d-flex gap-2 flex-wrap justify-content-center">
+            <input type="text" class="form-control" placeholder="Your Name" style="max-width:180px;background:var(--gray-50);border:1px solid var(--glass-border);color:var(--text-primary);border-radius:100px;padding:12px 20px;font-family:var(--font-body);">
+            <input type="email" class="form-control" placeholder="Your Email" style="max-width:220px;background:var(--gray-50);border:1px solid var(--glass-border);color:var(--text-primary);border-radius:100px;padding:12px 20px;font-family:var(--font-body);">
+            <button type="submit" class="btn-golden">Join Family</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4"><h5>Feel Harinam</h5><p>A living kirtan experience for the heart.</p></div>
+      <div class="col-md-2"><h5>Explore</h5><ul class="footer-links"><li><a href="kirtans.html">Kirtans</a></li><li><a href="chanting.html">Chanting</a></li><li><a href="stories.html">Stories</a></li></ul></div>
+      <div class="col-md-3"><h5>Connect</h5><ul class="footer-links"><li><a href="community.html">Community</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-md-3"><h5>Follow Us</h5><div class="d-flex gap-3 mt-2"><a href="#" style="font-size:1.2rem"><i class="fab fa-instagram"></i></a><a href="#" style="font-size:1.2rem"><i class="fab fa-youtube"></i></a><a href="#" style="font-size:1.2rem"><i class="fab fa-whatsapp"></i></a></div></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 Feel Harinam. Made with devotion for Krishna.</p></div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
