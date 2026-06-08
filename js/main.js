@@ -255,31 +255,76 @@ function initCenterCarousel(containerId) {
   if (nextBtn) nextBtn.addEventListener('click', nextSlide);
   if (prevBtn) prevBtn.addEventListener('click', prevSlide);
 
-  // Swipe / Touch Gestures for Mobile
+  // Swipe / Touch / Mouse Drag Gestures
   let startX = 0;
+  let startY = 0;
   let currentX = 0;
+  let currentY = 0;
   let isDragging = false;
+  let isScrolling = false;
 
-  track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    currentX = startX; // Reset currentX
+  // Prevent default browser drag behaviour on links and images inside the track
+  track.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+  });
+
+  // Track clicks inside the carousel, and prevent link navigation if a drag occurred
+  track.addEventListener('click', (e) => {
+    const diffX = Math.abs(currentX - startX);
+    if (diffX > 10) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true); // Capture phase is critical to intercept click on 'a' element
+
+  // Helper to start drag
+  function dragStart(clientX, clientY) {
+    startX = clientX;
+    startY = clientY;
+    currentX = startX;
+    currentY = startY;
     isDragging = true;
+    isScrolling = false;
     track.style.transition = 'none'; // Disable transition during drag
-  }, { passive: true });
+  }
 
-  track.addEventListener('touchmove', (e) => {
+  // Helper to move drag
+  function dragMove(clientX, clientY, preventDefaultFn) {
     if (!isDragging) return;
-    currentX = e.touches[0].clientX;
-    const diff = currentX - startX;
-    
+    currentX = clientX;
+    currentY = clientY;
+
+    const diffX = currentX - startX;
+    const diffY = currentY - startY;
+
+    // Check if the user is scrolling vertically (mobile touch only)
+    if (!isScrolling) {
+      if (Math.abs(diffY) > Math.abs(diffX) + 10) {
+        isScrolling = true;
+        isDragging = false;
+        updateCarousel(); // Snap back
+        return;
+      }
+    }
+
+    if (isScrolling) return;
+
+    // We are dragging horizontally, prevent vertical page scroll
+    if (preventDefaultFn) preventDefaultFn();
+
     // Show real-time drag position
     const containerWidth = container.offsetWidth;
     const slideWidth = slides[0].offsetWidth;
     const baseTranslateX = (containerWidth / 2) - (currentIndex * slideWidth + slideWidth / 2);
-    track.style.transform = `translateX(${baseTranslateX + diff}px)`;
-  }, { passive: true });
+    track.style.transform = `translateX(${baseTranslateX + diffX}px)`;
+  }
 
-  track.addEventListener('touchend', () => {
+  // Helper to end drag
+  function dragEnd() {
+    if (isScrolling) {
+      isScrolling = false;
+      return;
+    }
     if (!isDragging) return;
     isDragging = false;
     track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
@@ -292,9 +337,47 @@ function initCenterCarousel(containerId) {
         prevSlide();
       }
     } else {
-      // Re-align if swipe threshold not met
       updateCarousel();
     }
+  }
+
+  // Touch Event Listeners
+  track.addEventListener('touchstart', (e) => {
+    dragStart(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: false });
+
+  track.addEventListener('touchmove', (e) => {
+    dragMove(e.touches[0].clientX, e.touches[0].clientY, () => {
+      if (e.cancelable) e.preventDefault();
+    });
+  }, { passive: false });
+
+  track.addEventListener('touchend', dragEnd);
+  track.addEventListener('touchcancel', () => {
+    if (isDragging) {
+      isDragging = false;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+      updateCarousel();
+    }
+    isScrolling = false;
+  });
+
+  // Mouse Event Listeners for Desktop dragging
+  track.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return; // Only allow left-click dragging
+    dragStart(e.clientX, e.clientY);
+    track.style.cursor = 'grabbing';
+  });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    dragMove(e.clientX, e.clientY);
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!isDragging) return;
+    track.style.cursor = 'grab';
+    dragEnd();
   });
 
   // Re-calculate on window resize
