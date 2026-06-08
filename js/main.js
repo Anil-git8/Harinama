@@ -182,3 +182,130 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.add('active');
   }
 });
+
+// ===== CENTER MODE CAROUSEL INITIALIZER =====
+function initCenterCarousel(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  const track = container.querySelector('.carousel-track');
+  const slides = Array.from(container.querySelectorAll('.carousel-slide'));
+  const nextBtn = container.querySelector('.next-btn');
+  const prevBtn = container.querySelector('.prev-btn');
+  const dotsContainer = container.querySelector('.carousel-dots');
+
+  if (!track || slides.length === 0) return;
+
+  let currentIndex = 0; // Start at first slide
+
+  // Clear and create dot navigation
+  dotsContainer.innerHTML = '';
+  slides.forEach((_, idx) => {
+    const dot = document.createElement('span');
+    dot.classList.add('carousel-dot');
+    if (idx === currentIndex) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+  const dots = Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
+
+  function updateCarousel() {
+    const containerWidth = container.offsetWidth;
+    const slideWidth = slides[0].offsetWidth;
+
+    // Center Mode Translation Formula:
+    // translateX = (containerWidth / 2) - (currentIndex * slideWidth + slideWidth / 2)
+    const translateX = (containerWidth / 2) - (currentIndex * slideWidth + slideWidth / 2);
+    
+    track.style.transform = `translateX(${translateX}px)`;
+
+    // Update slide classes for active scaling
+    slides.forEach((slide, idx) => {
+      slide.classList.toggle('active-slide', idx === currentIndex);
+    });
+
+    // Update dot active state
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentIndex);
+    });
+  }
+
+  function goToSlide(index) {
+    currentIndex = Math.max(0, Math.min(index, slides.length - 1));
+    updateCarousel();
+  }
+
+  function nextSlide() {
+    if (currentIndex < slides.length - 1) {
+      goToSlide(currentIndex + 1);
+    } else {
+      goToSlide(0); // Loop back to start
+    }
+  }
+
+  function prevSlide() {
+    if (currentIndex > 0) {
+      goToSlide(currentIndex - 1);
+    } else {
+      goToSlide(slides.length - 1); // Loop to end
+    }
+  }
+
+  if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+  if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+  // Swipe / Touch Gestures for Mobile
+  let startX = 0;
+  let currentX = 0;
+  let isDragging = false;
+
+  track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    currentX = startX; // Reset currentX
+    isDragging = true;
+    track.style.transition = 'none'; // Disable transition during drag
+  }, { passive: true });
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+    const diff = currentX - startX;
+    
+    // Show real-time drag position
+    const containerWidth = container.offsetWidth;
+    const slideWidth = slides[0].offsetWidth;
+    const baseTranslateX = (containerWidth / 2) - (currentIndex * slideWidth + slideWidth / 2);
+    track.style.transform = `translateX(${baseTranslateX + diff}px)`;
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)';
+    
+    const diff = startX - currentX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    } else {
+      // Re-align if swipe threshold not met
+      updateCarousel();
+    }
+  });
+
+  // Re-calculate on window resize
+  window.addEventListener('resize', updateCarousel);
+
+  // Call initially (with a small timeout to let the DOM settle and render)
+  setTimeout(updateCarousel, 150);
+}
+
+// Initialize all page carousels
+document.addEventListener('DOMContentLoaded', () => {
+  initCenterCarousel('trending-carousel');
+  initCenterCarousel('emotional-carousel');
+  initCenterCarousel('meditation-carousel');
+});

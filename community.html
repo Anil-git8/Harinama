@@ -58,7 +58,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
-    .big-community-card {
+     .big-community-card {
       padding: 48px 36px;
       background: var(--white);
       border: 1px solid var(--glass-border);
@@ -67,6 +67,7 @@
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-sm);
     }
     .big-community-card::before {
       content: '';
@@ -74,30 +75,48 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 2px;
-      background: var(--violet-500);
+      height: 4px;
       transform: scaleX(0);
       transition: var(--transition);
     }
+    .big-community-card.whatsapp-card::before { background: #25D366; }
+    .big-community-card.telegram-card::before { background: #0088cc; }
+    .big-community-card.youtube-card::before { background: #FF0000; }
+    .big-community-card.newsletter-card::before { background: var(--brand-blue); }
+
     .big-community-card:hover::before { transform: scaleX(1); }
     .big-community-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
       box-shadow: var(--shadow-lg);
     }
+
     .big-community-card .big-icon {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: var(--violet-50);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      color: var(--violet-500);
+      font-size: 2rem;
       margin: 0 auto 24px;
       transition: var(--transition);
     }
-    .big-community-card:hover .big-icon { background: var(--violet-500); color: var(--white); }
+    
+    .big-community-card.whatsapp-card .big-icon { color: #25D366; background: rgba(37, 211, 102, 0.1); }
+    .big-community-card.telegram-card .big-icon { color: #0088cc; background: rgba(0, 136, 204, 0.1); }
+    .big-community-card.youtube-card .big-icon { color: #FF0000; background: rgba(255, 0, 0, 0.1); }
+    .big-community-card.newsletter-card .big-icon { color: var(--brand-blue); background: rgba(30, 150, 255, 0.1); }
+
+    .big-community-card.whatsapp-card:hover .big-icon { background: #25D366; color: var(--white); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+    .big-community-card.telegram-card:hover .big-icon { background: #0088cc; color: var(--white); box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); }
+    .big-community-card.youtube-card:hover .big-icon { background: #FF0000; color: var(--white); box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); }
+    .big-community-card.newsletter-card:hover .big-icon { background: var(--brand-blue); color: var(--white); box-shadow: 0 4px 15px rgba(30, 150, 255, 0.4); }
+
+    .big-community-card.whatsapp-card:hover { border-color: rgba(37, 211, 102, 0.3); }
+    .big-community-card.telegram-card:hover { border-color: rgba(0, 136, 204, 0.3); }
+    .big-community-card.youtube-card:hover { border-color: rgba(255, 0, 0, 0.3); }
+    .big-community-card.newsletter-card:hover { border-color: rgba(30, 150, 255, 0.3); }
+
     .big-community-card h3 { font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 12px; }
     .big-community-card p { color: var(--text-muted); margin-bottom: 24px; font-size: 0.92rem; font-weight: 300; }
     .stat-banner {
@@ -110,9 +129,15 @@
       flex-wrap: wrap;
       gap: 20px;
       box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+    .stat-banner:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(30, 150, 255, 0.2);
     }
     .stat-banner .stat { text-align: center; }
-    .stat-banner .stat-number { font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); font-weight: 400; }
+    .stat-banner .stat-number { font-family: var(--font-heading); font-size: 2.8rem; color: var(--brand-blue); font-weight: 900; }
     .stat-banner .stat-text { color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 400; }
   </style>
 </head>
@@ -154,8 +179,8 @@
 <section class="community-hero">
   <div class="container">
     <img src="images/globe_community.png" alt="Globe Community" style="width:72px;height:72px;object-fit:cover;border-radius:50%;margin-bottom:16px;" data-aos="fade-up">
-    <h1 data-aos="fade-up" data-aos-delay="200" style="color:var(--text-primary);margin:20px 0;font-weight:300;">Join the Worldwide<br><span style="color:var(--violet-500);font-style:italic;">Harinam Movement</span></h1>
-    <p style="color:var(--text-muted);font-size:1.05rem;max-width:520px;margin:0 auto;font-weight:300;" data-aos="fade-up" data-aos-delay="400">Connect with thousands of devotees across the globe. Chant together. Grow together.</p>
+    <h1 data-aos="fade-up" data-aos-delay="200" style="color:var(--text-primary);margin:20px 0;font-weight:900;">Join the Worldwide<br><span style="color:var(--brand-blue);font-weight:900;">Harinam Movement</span></h1>
+    <p style="color:var(--text-muted);font-size:1.05rem;max-width:520px;margin:0 auto;font-weight:400;" data-aos="fade-up" data-aos-delay="400">Connect with thousands of devotees across the globe. Chant together. Grow together.</p>
   </div>
 </section>
 
@@ -181,7 +206,7 @@
     </div>
     <div class="row g-4">
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-        <div class="big-community-card">
+        <div class="big-community-card whatsapp-card">
           <div class="big-icon"><i class="fab fa-whatsapp"></i></div>
           <h3>WhatsApp</h3>
           <p>Daily mantra reminders, kirtan updates, and spiritual inspiration delivered to your phone.</p>
@@ -189,7 +214,7 @@
         </div>
       </div>
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-        <div class="big-community-card">
+        <div class="big-community-card telegram-card">
           <div class="big-icon"><i class="fab fa-telegram"></i></div>
           <h3>Telegram</h3>
           <p>Join our kirtan channel for exclusive audio, live sessions, and devotee discussions.</p>
@@ -197,7 +222,7 @@
         </div>
       </div>
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-        <div class="big-community-card">
+        <div class="big-community-card youtube-card">
           <div class="big-icon"><i class="fab fa-youtube"></i></div>
           <h3>YouTube</h3>
           <p>Watch live kirtans, Krishna stories, and spiritual vlogs from Vrindavan and around the world.</p>
@@ -205,7 +230,7 @@
         </div>
       </div>
       <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-        <div class="big-community-card">
+        <div class="big-community-card newsletter-card">
           <div class="big-icon"><i class="fas fa-envelope"></i></div>
           <h3>Newsletter</h3>
           <p>Weekly curated spiritual content – kirtans, stories, and wisdom directly to your inbox.</p>
