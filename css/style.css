@@ -475,11 +475,13 @@ a:hover { color: var(--brand-blue-light); }
 
 .hero-content .hero-emoji {
   width: 90px;
-  height: 80px;
+  height: 90px;
   margin: 0 auto 24px;
   display: block;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid rgba(232, 163, 23, 0.25);
+  box-shadow: 0 8px 24px rgba(232, 163, 23, 0.15);
 }
 
 .hero-content h1 {
@@ -1328,6 +1330,11 @@ a.kirtan-link {
 }
 
 @media(max-width: 767px) {
+  .hero {
+    min-height: 75vh !important;
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700 !important;
   }
@@ -1398,7 +1405,28 @@ a.kirtan-link {
   }
 
   .footer {
-    padding: 48px 0 24px;
+    padding: 36px 0 20px !important;
+    text-align: center;
+  }
+  .footer .d-flex {
+    justify-content: center;
+  }
+  .footer [class^="col-"] {
+    margin-bottom: 20px;
+  }
+  .footer [class^="col-"]:last-child {
+    margin-bottom: 0;
+  }
+  .footer h5 {
+    margin-bottom: 12px !important;
+    font-size: 1rem !important;
+  }
+  .footer-links li {
+    margin-bottom: 6px !important;
+  }
+  .footer-bottom {
+    margin-top: 24px;
+    padding-top: 16px;
   }
 
   .page-header {
