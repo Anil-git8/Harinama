@@ -125,7 +125,8 @@ function incrementChant() {
   }
   
   const total = targetRounds * mantrasPerRound;
-  if (chantCount >= total) {
+  if (chantCount === total) {
+    showCelebrationPopup(targetRounds);
     const progress = document.getElementById('roundProgress');
     if (progress) progress.textContent = 'Congratulations! You completed ' + targetRounds + ' rounds!';
   }
@@ -309,3 +310,153 @@ document.addEventListener('DOMContentLoaded', () => {
   initCenterCarousel('emotional-carousel');
   initCenterCarousel('meditation-carousel');
 });
+
+// ===== CONFETTI CELEBRATION EFFECT =====
+function triggerConfetti() {
+  const canvas = document.createElement('canvas');
+  canvas.style.position = 'fixed';
+  canvas.style.top = '0';
+  canvas.style.left = '0';
+  canvas.style.width = '100vw';
+  canvas.style.height = '100vh';
+  canvas.style.zIndex = '999999';
+  canvas.style.pointerEvents = 'none';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+
+  const handleResize = () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  };
+  window.addEventListener('resize', handleResize);
+
+  const colors = ['#FF0D54', '#14D2F4', '#FFD700', '#7C4DFF', '#39FF14', '#FF6700'];
+  const confettiCount = 120;
+  const particles = [];
+
+  class ConfettiParticle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * -height - 20;
+      this.size = Math.random() * 8 + 6;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.speedY = Math.random() * 4 + 4;
+      this.speedX = (Math.random() - 0.5) * 3;
+      this.rotation = Math.random() * 360;
+      this.rotationSpeed = (Math.random() - 0.5) * 8;
+    }
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.rotation += this.rotationSpeed;
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation * Math.PI / 180);
+      ctx.fillStyle = this.color;
+      ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 1.4);
+      ctx.restore();
+    }
+  }
+
+  for (let i = 0; i < confettiCount; i++) {
+    particles.push(new ConfettiParticle());
+  }
+
+  let animationFrameId;
+  const startTime = Date.now();
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    let alive = false;
+    
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+      if (p.y < height + 20) {
+        alive = true;
+      }
+    });
+
+    if (alive && Date.now() - startTime < 5000) {
+      animationFrameId = requestAnimationFrame(animate);
+    } else {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+      canvas.remove();
+    }
+  }
+
+  animate();
+}
+
+// ===== CELEBRATION POPUP MODAL =====
+function showCelebrationPopup(rounds) {
+  triggerConfetti();
+
+  const overlay = document.createElement('div');
+  overlay.className = 'celebration-popup-overlay';
+  overlay.style.position = 'fixed';
+  overlay.style.inset = '0';
+  overlay.style.backgroundColor = 'rgba(16, 44, 87, 0.45)';
+  overlay.style.backdropFilter = 'blur(12px)';
+  overlay.style.webkitBackdropFilter = 'blur(12px)';
+  overlay.style.zIndex = '999999';
+  overlay.style.display = 'flex';
+  overlay.style.alignItems = 'center';
+  overlay.style.justifyContent = 'center';
+  overlay.style.opacity = '0';
+  overlay.style.transition = 'opacity 0.4s ease';
+
+  const content = document.createElement('div');
+  content.className = 'celebration-popup-content';
+  content.style.background = 'var(--white)';
+  content.style.border = '2px solid var(--violet-300)';
+  content.style.borderRadius = '24px';
+  content.style.padding = '40px 30px';
+  content.style.maxWidth = '420px';
+  content.style.width = '90%';
+  content.style.textAlign = 'center';
+  content.style.boxShadow = 'var(--shadow-xl)';
+  content.style.transform = 'scale(0.8) translateY(20px)';
+  content.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+  content.innerHTML = `
+    <div style="font-size: 3.5rem; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">🦚</div>
+    <h2 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 12px; font-size: 2rem; font-weight: 900;">Haribol!</h2>
+    <p style="color: var(--brand-blue-dark); font-weight: 700; font-size: 1.15rem; margin-bottom: 8px;">Round Completed Successfully!</p>
+    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px;">
+      Congratulations! You have completed your target of <strong>${rounds} ${rounds === 1 ? 'Round' : 'Rounds'}</strong> (${(rounds * 108).toLocaleString()} mantras). Keep chanting and stay blessed!
+    </p>
+    <button class="btn-golden" id="closeCelebrationBtn" style="padding: 12px 36px; font-size: 0.88rem; font-weight: 700; border-radius: 100px; cursor: pointer; border: none; background: var(--gradient-saffron); color: var(--white); text-transform: uppercase; letter-spacing: 0.04em;">
+      Chant Again
+    </button>
+  `;
+
+  overlay.appendChild(content);
+  document.body.appendChild(overlay);
+
+  // Trigger reflow to start transition
+  overlay.offsetWidth;
+
+  // Fade in and scale up
+  overlay.style.opacity = '1';
+  content.style.transform = 'scale(1) translateY(0)';
+
+  const closePopup = () => {
+    overlay.style.opacity = '0';
+    content.style.transform = 'scale(0.8) translateY(20px)';
+    setTimeout(() => {
+      overlay.remove();
+    }, 400);
+  };
+
+  content.querySelector('#closeCelebrationBtn').addEventListener('click', closePopup);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closePopup();
+  });
+}

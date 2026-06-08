@@ -354,8 +354,11 @@
     circle.style.boxShadow = '0 0 80px rgba(124, 77, 255, 0.2)';
     setTimeout(() => { circle.style.borderColor = 'var(--violet-300)'; circle.style.boxShadow = 'var(--shadow-lg)'; }, 300);
 
-    if (pageChantCount >= pageTargetRounds * 108) {
+    if (pageChantCount === pageTargetRounds * 108) {
       circle.style.background = 'radial-gradient(circle, rgba(124, 77, 255, 0.1), var(--white))';
+      if (typeof showCelebrationPopup === 'function') {
+        showCelebrationPopup(pageTargetRounds);
+      }
     }
   }
 
