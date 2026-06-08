@@ -336,7 +336,7 @@ a:hover { color: var(--brand-blue-light); }
   color: var(--white) !important;
 }
 .navbar-custom:not(.scrolled) .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
 .navbar-custom.scrolled {
@@ -432,7 +432,7 @@ a:hover { color: var(--brand-blue-light); }
 }
 
 .navbar-custom .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%231E96FF' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
   display: inline-block;
   width: 1.5em;
   height: 1.5em;
@@ -1473,18 +1473,19 @@ a.kirtan-link {
     gap: 12px;
   }
 
-  .navbar-custom .nav-link {
+  .navbar-custom .offcanvas .nav-link {
     padding: 12px 20px !important;
     border-radius: 8px;
     font-size: 0.95rem;
     font-weight: 500;
     transition: var(--transition);
+    color: var(--text-secondary) !important;
   }
 
-  .navbar-custom .nav-link:hover,
-  .navbar-custom .nav-link.active {
-    background: var(--violet-50);
-    color: var(--violet-500) !important;
+  .navbar-custom .offcanvas .nav-link:hover,
+  .navbar-custom .offcanvas .nav-link.active {
+    background: var(--violet-50) !important;
+    color: var(--violet-600) !important;
   }
 
   .navbar-custom .nav-link::after {
@@ -1531,6 +1532,10 @@ a.kirtan-link {
   .brand-logo { height: 32px !important; width: 32px !important; }
   .brand-line-1 { font-size: 0.95rem; }
   .brand-line-2 { font-size: 0.95rem; }
+
+  .scroll-down-indicator {
+    display: none !important;
+  }
 
 
   .hero-buttons {
