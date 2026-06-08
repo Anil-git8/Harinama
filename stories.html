@@ -21,6 +21,148 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+  /* Monochrome/Grayscale E-Reader Theme for Story Modals ONLY */
+  .story-modal .modal-dialog {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+  }
+  .story-modal .modal-content {
+    background: #ffffff !important;
+    border: 1px solid #1a1a1a !important;
+    border-radius: 12px !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+    overflow: hidden;
+  }
+  .story-modal .modal-header {
+    border-bottom: 1px solid #e0e0e0 !important;
+    background: #f8f8f8 !important;
+    padding: 20px 28px !important;
+  }
+  .story-modal .modal-title {
+    font-family: 'Lora', Georgia, serif !important;
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    color: #1a1a1a !important;
+  }
+  .story-modal .modal-title span {
+    color: #1a1a1a !important;
+    border-bottom: 2px solid #1a1a1a !important;
+  }
+  .story-modal .btn-close {
+    background-color: #ffffff !important;
+    border: 1px solid #cccccc !important;
+    border-radius: 50% !important;
+    padding: 8px !important;
+    box-shadow: none !important;
+    transition: var(--transition);
+    opacity: 0.8 !important;
+  }
+  .story-modal .btn-close:hover {
+    transform: rotate(90deg);
+    opacity: 1 !important;
+    background-color: #f0f0f0 !important;
+  }
+  .story-modal .modal-body {
+    padding: 0 !important;
+  }
+  .story-modal-layout {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .story-modal-image-col {
+    flex: 0 0 40%;
+    max-width: 40%;
+    min-height: 450px;
+    background: #f0f0f0;
+    position: relative;
+    overflow: hidden;
+  }
+  .story-modal-image-col img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: grayscale(100%) contrast(1.1) !important; /* Forces black & white */
+  }
+  .story-modal-text-col {
+    flex: 0 0 60%;
+    max-width: 60%;
+    padding: 40px;
+    max-height: 75vh;
+    overflow-y: auto;
+    background: #ffffff;
+  }
+  /* Custom scrollbar for text column */
+  .story-modal-text-col::-webkit-scrollbar {
+    width: 6px;
+  }
+  .story-modal-text-col::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+  .story-modal-text-col::-webkit-scrollbar-thumb {
+    background: #888888;
+    border-radius: 10px;
+  }
+  .story-modal-text-col::-webkit-scrollbar-thumb:hover {
+    background: #222222;
+  }
+  
+  .story-modal-meta {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666666 !important;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: block;
+    font-family: 'Lora', Georgia, serif !important;
+  }
+  
+  .story-modal-paragraph {
+    color: #222222 !important;
+    font-size: 1.05rem !important;
+    line-height: 1.85 !important;
+    margin-bottom: 20px !important;
+    font-weight: 400 !important;
+    font-family: 'Lora', Georgia, serif !important;
+  }
+  
+  .story-modal-quote {
+    border-left: 4px solid #1a1a1a !important;
+    padding-left: 20px;
+    margin: 24px 0;
+    font-style: italic;
+    font-size: 1.1rem !important;
+    color: #444444 !important;
+    line-height: 1.7 !important;
+    background: #f5f5f5 !important;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-right: 14px;
+    border-radius: 0 8px 8px 0;
+    font-family: 'Lora', Georgia, serif !important;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 991px) {
+    .story-modal-image-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+      min-height: 250px;
+    }
+    .story-modal-text-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+      padding: 30px 24px;
+      max-height: 50vh;
+    }
+  }
+  </style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -92,6 +234,7 @@
         <p style="color:var(--text-muted);margin-bottom:16px;line-height:1.9;font-weight:300;">जब यमुना नदी में कालिया नाग ने अपना विष फैलाया, तब बाल कृष्ण ने यमुना में कूदकर कालिया के फन पर नृत्य किया। यह लीला दिव्य साहस और करुणा की कहानी है।</p>
         <p style="color:var(--text-muted);margin-bottom:16px;line-height:1.9;font-weight:300;">When the serpent Kaliya poisoned the waters of the Yamuna, young Krishna leapt into the river and danced upon Kaliya's hoods – a story of divine courage, compassion, and the triumph of love over fear.</p>
         <p style="color:var(--text-muted);line-height:1.9;font-weight:300;">This leela teaches us that no matter how poisonous our material attachments may be, Krishna can dance upon them and liberate us.</p>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#kaliyaModal" class="btn-outline-golden mt-3" style="padding:10px 24px;font-size:0.88rem;">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
       </div>
     </div>
   </div>
@@ -105,69 +248,80 @@
       <div class="divider"></div>
     </div>
     <div class="row g-4">
+      <!-- Story 1: Vasudeva Crossing the Yamuna -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
         <div class="story-card">
-          <div class="story-image"><img src="images/peacock_feather.png" alt="How Chanting Changed My Life"></div>
+          <div class="story-image"><img src="images/vasudeva_yamuna.png" alt="Vasudeva Crossing the Yamuna"></div>
           <div class="story-body">
-            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Power of Chanting</span>
-            <h4>How Chanting Changed My Life</h4>
-            <p>A devotee's personal journey from darkness to divine light through the power of the Maha Mantra.</p>
-            <a href="#" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Book Story</span>
+            <h4>Vasudeva Crossing the Yamuna</h4>
+            <p>Vasudeva carries baby Krishna in a basket across the raging Yamuna, shielded by Ananta Shesha.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#yamunaModal" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
+      
+      <!-- Story 2: The Boundless Bound (Damodara) -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
         <div class="story-card">
-          <div class="story-image"><img src="images/krishna_flute.png" alt="Krishna's Flute – The Call"></div>
+          <div class="story-image"><img src="images/damodara_leela.png" alt="The Boundless Bound (Damodara)"></div>
           <div class="story-body">
-            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Leela</span>
-            <h4>Krishna's Flute – The Call</h4>
-            <p>Why does the sound of Krishna's flute enchant every soul? The mystical power of divine sound vibration.</p>
-            <a href="#" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Book Story</span>
+            <h4>The Boundless Bound (Damodara)</h4>
+            <p>How Mother Yashoda bound the supreme Lord of all universes with the ropes of pure love and devotion.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#damodaraModal" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
+      
+      <!-- Story 3: Kaliya Serpent Subdued (Kaliya Leela) -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
         <div class="story-card">
-          <div class="story-image"><img src="images/sunrise_river.png" alt="My First Visit to Vrindavan"></div>
+          <div class="story-image"><img src="images/kaliya_serpent.png" alt="Kaliya Serpent Subdued"></div>
           <div class="story-body">
-            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Vrindavan Experience</span>
-            <h4>My First Visit to Vrindavan</h4>
-            <p>Walking through the sacred streets, hearing the temple bells, feeling Krishna's presence everywhere.</p>
-            <a href="#" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Book Story</span>
+            <h4>Kaliya Serpent Subdued</h4>
+            <p>How young Krishna subdued the giant venomous serpent Kaliya and danced upon his hoods, purifying the Yamuna.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#kaliyaModal" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
+      
+      <!-- Story 4: Lifting of Govardhan Hill (Govardhan Leela) -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
         <div class="story-card">
-          <div class="story-image"><img src="images/lotus_flower.png" alt="Govardhan Leela"></div>
+          <div class="story-image"><img src="images/lotus_flower.png" alt="Lifting of Govardhan Hill"></div>
           <div class="story-body">
-            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Leela</span>
-            <h4>Govardhan Leela</h4>
-            <p>When Krishna lifted Govardhan Hill on His little finger to protect the villagers of Vrindavan.</p>
-            <a href="#" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Book Story</span>
+            <h4>Lifting of Govardhan Hill</h4>
+            <p>When Lord Krishna lifted Govardhan Hill on His little finger to protect the residents of Vrindavan from Indra's wrath.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#govardhanModal" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
+      
+      <!-- Story 5: The Gift of Sudama Vipra -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
         <div class="story-card">
-          <div class="story-image"><img src="images/golden_heart.png" alt="From Atheist to Devotee"></div>
+          <div class="story-image"><img src="images/sudama_vipra.png" alt="The Gift of Sudama Vipra"></div>
           <div class="story-body">
-            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Transformation</span>
-            <h4>From Atheist to Devotee</h4>
-            <p>A scientist who found God through the vibration of the Holy Name – a modern miracle story.</p>
-            <a href="#" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Book Story</span>
+            <h4>The Gift of Sudama Vipra</h4>
+            <p>Krishna lovingly accepts a humble offering of chipped rice from His poor childhood friend Sudama.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#sudamaModal" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
+      
+      <!-- Story 6: The Syamantaka Jewel Mystery -->
       <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
         <div class="story-card">
-          <div class="story-image"><img src="images/cherry_blossoms.png" alt="Radha Krishna – Eternal Love"></div>
+          <div class="story-image"><img src="images/syamantaka_jewel.png" alt="The Syamantaka Jewel Mystery"></div>
           <div class="story-body">
-            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Divine Love</span>
-            <h4>Radha Krishna – Eternal Love</h4>
-            <p>The supreme love story that transcends all material understanding – the divine relationship.</p>
-            <a href="#" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+            <span style="color:var(--violet-500);font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;">Krishna Book Story</span>
+            <h4>The Syamantaka Jewel Mystery</h4>
+            <p>Krishna's quest to recover the Syamantaka jewel, demonstrating His truthfulness and divine prowess.</p>
+            <a href="#" data-bs-toggle="modal" data-bs-target="#syamantakaModal" class="btn-outline-golden mt-2" style="padding:8px 20px;font-size:0.82rem;">Read More <i class="fas fa-arrow-right ms-1"></i></a>
           </div>
         </div>
       </div>
@@ -181,11 +335,212 @@
       <div class="col-12 col-md-4"><h5>Harinama eva kevalam</h5><p>A living kirtan experience for the heart.</p></div>
       <div class="col-6 col-md-2"><h5>Explore</h5><ul class="footer-links"><li><a href="kirtans.html">Kirtans</a></li><li><a href="chanting.html">Chanting</a></li><li><a href="stories.html">Stories</a></li></ul></div>
       <div class="col-6 col-md-3"><h5>Connect</h5><ul class="footer-links"><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact us</a></li></ul></div>
-      <div class="col-12 col-md-3"><h5>Follow Us</h5><div class="d-flex gap-3 mt-2"><a href="http://instagram.com/harinamaevakevalam" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@Hari-namaevakevalam" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-youtube"></i></a><a href="http://open.spotify.com/artist/0MhdmOuZhIQkAYJIBxpRJv" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-spotify"></i></a></div></div>
+      <div class="col-12 col-md-3"><h5>Follow Us</h5><div class="d-flex gap-3 mt-2"><a href="http://instagram.com/harinamaevakevalam" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-instagram"></i></a><a href="https://www.youtube.com/@Hari-namaevakevalam" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-youtube"></i></a><a href="http://open.spotify.com/artist/0MhdmOuZhIQkAYJIBxpRJv" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-spotify"></i></a><a href="https://facebook.com/share/1Gw1BJ1iXy" target="_blank" rel="noopener noreferrer" style="font-size:1.2rem"><i class="fab fa-facebook-f"></i></a></div></div>
     </div>
     <div class="footer-bottom"><p>© 2026 Harinama eva kevalam. Made with devotion for Krishna.</p></div>
   </div>
 </footer>
+
+<!-- ===== STORY MODALS ===== -->
+
+<!-- 1. Vasudeva Crossing the Yamuna Modal -->
+<div class="modal fade story-modal" id="yamunaModal" tabindex="-1" aria-labelledby="yamunaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="yamunaModalLabel">Vasudeva Crossing the <span>Yamuna</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="story-modal-layout">
+          <div class="story-modal-image-col">
+            <img src="images/vasudeva_yamuna.png" alt="Vasudeva Crossing the Yamuna">
+          </div>
+          <div class="story-modal-text-col">
+            <span class="story-modal-meta">Krsna Book Chapter 3</span>
+            <p class="story-modal-paragraph">At the auspicious hour of midnight, when the star Rohini was rising, the Supreme Personality of Godhead, Lord Sri Krishna, appeared as the son of Devaki and Vasudeva. He manifested in His majestic four-armed Vishnu form, decorated with jewels and holding the conch, disc, club, and lotus flower. Seeing this wonderful form, Vasudeva and Devaki prayed to Him with awe and reverence, requesting Him to conceal His divine form to protect Him from the cruel hands of King Kamsa, who had already slain their six previous children.</p>
+            
+            <p class="story-modal-paragraph">Responding to His parents' prayers, the Lord transformed Himself into a small baby and instructed Vasudeva to carry Him immediately to the village of Gokula (Vrindavan) to the house of Nanda Maharaja and Yashoda, and to bring back Yashoda's newborn daughter. Although the prison gates of Kamsa were locked and guarded by heavy security, by the spiritual energy of the Lord (Yogamaya), the guards fell into a deep sleep, and all the iron gates and shackles unlocked spontaneously.</p>
+            
+            <div class="story-modal-quote">
+              "Lord Krishna appeared in the darkness of the night, yet He illuminated the entire prison house with His transcendental effulgence."
+            </div>
+            
+            <p class="story-modal-paragraph">Vasudeva placed the baby in a wicker basket and stepped out into the stormy night. As he walked, heavy rains poured down, and the wind raged. To protect the Supreme Lord, Ananta Shesha (the celestial multi-headed serpent) appeared behind Vasudeva and spread His hoods like an umbrella over the baby's basket. When Vasudeva reached the bank of the river Yamuna, the river was roaring with high waves and foaming currents. However, as soon as the lotus feet of Lord Krishna touched the water, the Yamuna parted, creating a safe pathway for Vasudeva, just as the Red Sea parted for Moses or the ocean parted for Lord Rama.</p>
+            
+            <p class="story-modal-paragraph">Vasudeva crossed the river safely, entered Gokula, and went to the house of Nanda Maharaja. Everyone was fast asleep under the influence of Yogamaya. He silently swapped baby Krishna with Yashoda's newborn baby girl, then returned to the prison of Mathura. As soon as Vasudeva placed Kamsa's future captor back in the shackles, the prison doors locked themselves again, and the guards awoke, unaware of the divine exchange that had just occurred.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 2. The Boundless Bound (Damodara Leela) Modal -->
+<div class="modal fade story-modal" id="damodaraModal" tabindex="-1" aria-labelledby="damodaraModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="damodaraModalLabel">The Boundless <span>Bound</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="story-modal-layout">
+          <div class="story-modal-image-col">
+            <img src="images/damodara_leela.png" alt="The Boundless Bound">
+          </div>
+          <div class="story-modal-text-col">
+            <span class="story-modal-meta">Krsna Book Chapter 9</span>
+            <p class="story-modal-paragraph">One day, Mother Yashoda decided to churn butter herself, singing beautiful songs about her beloved son Krishna's childhood pastimes. As she churned, baby Krishna woke up and felt hungry. He approached His mother, climbed onto her lap, and began to drink her milk. Mother Yashoda lovingly stroked His head. Suddenly, she smelled milk boiling over in the kitchen. She quickly set Krishna down and rushed to save the milk.</p>
+            
+            <p class="story-modal-paragraph">Left unsatisfied and angry, Krishna broke the clay butter pot with a stone, took some butter, and walked away. Mother Yashoda returned to find the broken pot and butter smeared on the floor. She followed the buttery footprints to the courtyard, where she saw Krishna sitting on a large wooden grinding mortar, feeding fresh butter to the monkeys and laughing. When Krishna saw His mother approaching with a small stick in her hand, He jumped off the mortar in fear and began to run.</p>
+            
+            <div class="story-modal-quote">
+              "The Supreme Lord, before whom fear itself is afraid, ran in fear of His mother, His eyes filled with tears."
+            </div>
+            
+            <p class="story-modal-paragraph">Mother Yashoda chased Him, and although yogis cannot capture the Lord even after thousands of years of meditation, she finally caught Him. Seeing Him crying and rubbing His eyes, she threw away her stick, deciding only to bind Him to the wooden mortar as a gentle punishment. However, when she tried to tie Him, the rope fell short by exactly two fingers. She fetched another rope, but again it was two fingers too short. No matter how many ropes she joined together, the final rope was always short by exactly two fingers!</p>
+            
+            <p class="story-modal-paragraph">One "finger" represents the devotee's hard work and intense endeavor, and the second "finger" represents the Lord's causeless mercy. Seeing His mother sweating and exhausted, the Lord felt great compassion and allowed Himself to be bound by her rope of pure love. Through this Damodara-leela, Krishna showed that He can never be controlled by wealth, strength, or knowledge, but only by the binding force of pure, selfless devotion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Kaliya Serpent Subdued Modal -->
+<div class="modal fade story-modal" id="kaliyaModal" tabindex="-1" aria-labelledby="kaliyaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="kaliyaModalLabel">Kaliya Serpent <span>Subdued</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="story-modal-layout">
+          <div class="story-modal-image-col">
+            <img src="images/kaliya_serpent.png" alt="Kaliya Serpent Subdued">
+          </div>
+          <div class="story-modal-text-col">
+            <span class="story-modal-meta">Krsna Book Chapter 16</span>
+            <p class="story-modal-paragraph">In the river Yamuna, there was a deep lake inhabited by the giant, multi-headed serpent Kaliya. The serpent's venom was so potent that it heated the water and released poisonous vapors into the air, killing any bird that flew over it and destroying the grass and trees along the shore. One day, the cowherd boys and their cows drank the poisoned water and fell dead. Krishna, seeing them lifeless, cast His merciful glance over them and brought them back to life.</p>
+            
+            <p class="story-modal-paragraph">To purify the Yamuna, Krishna climbed a tall Kadamba tree and leaped into the poisoned, boiling water. He swam around, making a loud splashing sound. Angered by this intrusion, Kaliya emerged, his eyes blazing with fury and his multiple hoods spitting fire and venom. He wrapped himself around Krishna's delicate body, binding Him tightly. The cowherd boys and residents of Vrindavan ran to the river bank, weeping and fearing for the Lord's life.</p>
+            
+            <div class="story-modal-quote">
+              "The cowherd boys and calves wept at the sight of the Lord bound by the serpent, but Krishna rose up, ready to perform His divine dance."
+            </div>
+            
+            <p class="story-modal-paragraph">Seeing the distress of His devotees, Krishna expanded His body, forcing the serpent to release Him. He then jumped onto Kaliya's hoods and began to dance. As Kaliya tried to raise one of his hundred hoods, Krishna would step on it, crushing his pride. The celestial denizens gathered in the sky, playing drums and showering flowers. Kaliya began to vomit blood, his strength failing under the weight of the Lord.</p>
+            
+            <p class="story-modal-paragraph">Kaliya's wives, the Nagapatnis, appeared and prayed to Krishna with folded hands, begging for their husband's life. They acknowledged that the dust of Krishna's feet on Kaliya's head was a great blessing. Krishna mercifully spared Kaliya, ordering him to leave the Yamuna immediately and relocate to the island of Ramanaka. He assured Kaliya that Garuda would not attack him because the mark of His lotus feet was now printed on the serpent's hoods.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Lifting of Govardhan Hill Modal -->
+<div class="modal fade story-modal" id="govardhanModal" tabindex="-1" aria-labelledby="govardhanModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="govardhanModalLabel">Lifting of <span>Govardhan Hill</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="story-modal-layout">
+          <div class="story-modal-image-col">
+            <img src="images/lotus_flower.png" alt="Lifting of Govardhan Hill">
+          </div>
+          <div class="story-modal-text-col">
+            <span class="story-modal-meta">Krsna Book Chapter 25</span>
+            <p class="story-modal-paragraph">Every year, the residents of Vrindavan performed a sacrifice to Lord Indra, the king of heaven, for sending rain. Krishna, wishing to curb Indra's pride, convinced His father Nanda Maharaja to stop the Indra-yajna and instead worship Govardhan Hill, the cows, and the local Brahmins, as the hill provided food and water for the cows and community. Infuriated by this perceived insult, Lord Indra ordered the Samvartaka clouds—usually reserved for cosmic destruction—to deluge Vrindavan with torrential rains and hail.</p>
+            
+            <p class="story-modal-paragraph">The heavy storm flooded Vrindavan, and the freezing residents and shivering animals took shelter at Krishna's lotus feet, crying out for protection. Krishna assured them not to worry. He walked to Govardhan Hill and, with the ease of a child picking up a mushroom, lifted the entire massive hill with the pinky finger of His left hand, holding it up like a giant umbrella.</p>
+            
+            <div class="story-modal-quote">
+              "Krishna held the mountain for seven days and seven nights on His little finger, showing His supreme power and love for Vrindavan."
+            </div>
+            
+            <p class="story-modal-paragraph">Krishna called all the residents, cows, and calves to assemble under the hill, where they remained safe and dry. For seven consecutive days and nights, the Lord stood holding the hill, without moving, sleeping, eating, or drinking. The residents gazed at His beautiful face, forgetting their fear and hunger. Indra directed all his power to wash away Vrindavan, but not a single drop of water could penetrate the shelter.</p>
+            
+            <p class="story-modal-paragraph">Realizing the supreme position of Lord Krishna, Indra stopped the storms and ordered the clouds to withdraw. The sun shone once again, and the residents returned to their homes. Indra then descended from heaven, bowed down before Krishna, and begged for forgiveness for his foolish arrogance. Krishna pardoned him, reminding him to remain humble in his service to the universe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. The Gift of Sudama Vipra Modal -->
+<div class="modal fade story-modal" id="sudamaModal" tabindex="-1" aria-labelledby="sudamaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sudamaModalLabel">The Gift of <span>Sudama Vipra</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="story-modal-layout">
+          <div class="story-modal-image-col">
+            <img src="images/sudama_vipra.png" alt="The Gift of Sudama Vipra">
+          </div>
+          <div class="story-modal-text-col">
+            <span class="story-modal-meta">Krsna Book Chapter 80</span>
+            <p class="story-modal-paragraph">Sudama was a childhood friend and classmate of Lord Krishna at Sandipani Muni's ashram. He was a pure, self-realized Brahmin who lived in extreme poverty. He never asked anyone for anything, surviving on whatever came of its own accord. His wife, seeing their children starving, gently suggested that he visit his old friend Krishna, who was now the King of Dvaraka. She did not want wealth; she only wished for Sudama to see his beloved friend.</p>
+            
+            <p class="story-modal-paragraph">Sudama agreed, but he felt embarrassed to visit the Lord empty-handed. His wife begged around the neighborhood and gathered four handfuls of chipped (flat) rice, wrapping them in a torn piece of cloth. Sudama set out on foot. Upon reaching Dvaraka, he crossed the grand palaces and entered Krishna's personal chamber. The moment Krishna saw His dear friend, He immediately stood up, embraced him tightly, washed his tired feet, and sprinkled that water on His own head. Rukmini, the goddess of fortune, fanned Sudama with a golden camara.</p>
+            
+            <div class="story-modal-quote">
+              "The Lord of the Universe washed the dust from the feet of His poor friend, showing that He is conquered only by love."
+            </div>
+            
+            <p class="story-modal-paragraph">Krishna and Sudama laughed, recalling their days at the gurukula. Krishna then noticed Sudama hiding a small bundle under his arm. "What have you brought for Me, my friend?" He asked playfully. Sudama was too embarrassed to offer the cheap chipped rice, but Krishna snatched the bundle. He opened it and joyfully ate a handful. "This is the most delicious food!" Krishna exclaimed, and took a second handful. As He went for a third, Rukmini held His hand, signifying that the first two handfuls had already given Sudama all the wealth of the material and spiritual worlds.</p>
+            
+            <p class="story-modal-paragraph">The next morning, Sudama bid farewell and walked home, feeling deeply blissful even though Krishna had given him no physical gifts. But as he approached his village, he was astounded to find that his dilapidated hut had been replaced by a magnificent palace of gold, jewels, and beautiful gardens, and his family was dressed in royal attire. Sudama realized that Krishna had bestowed boundless wealth upon him in silence, teaching him that the Lord honors the smallest offering made with pure love and devotion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. The Syamantaka Jewel Mystery Modal -->
+<div class="modal fade story-modal" id="syamantakaModal" tabindex="-1" aria-labelledby="syamantakaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="syamantakaModalLabel">The Syamantaka <span>Jewel Mystery</span></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="story-modal-layout">
+          <div class="story-modal-image-col">
+            <img src="images/syamantaka_jewel.png" alt="The Syamantaka Jewel Mystery">
+          </div>
+          <div class="story-modal-text-col">
+            <span class="story-modal-meta">Krsna Book Chapter 56</span>
+            <p class="story-modal-paragraph">King Satrajit was a great devotee of the Sun-god, Surya, who presented him with the magical Syamantaka jewel. This extraordinary jewel produced eight mans (approx. 170 lbs) of gold daily and protected the kingdom from disease, famine, and natural disasters. Lord Krishna suggested that the jewel be given to King Ugrasena for the welfare of the state, but Satrajit refused out of greed, keeping it in his house.</p>
+            
+            <p class="story-modal-paragraph">One day, Satrajit's brother, Prasena, wore the dazzling jewel while hunting in the forest. A lion attacked and killed Prasena, taking the jewel. Soon after, the great bear Jambavan (a legendary devotee from Lord Rama's time) saw the lion, killed it, and took the jewel back to his cave to give to his young son to play with. When Prasena did not return, Satrajit falsely rumored that Krishna had murdered him to steal the jewel.</p>
+            
+            <div class="story-modal-quote">
+              "To clear His name of false accusations, the Lord set out to find the lost jewel and restore the truth."
+            </div>
+            
+            <p class="story-modal-paragraph">To prove His innocence, Krishna went into the forest with a search party. Following the tracks, He discovered the dead bodies of Prasena and the lion, eventually leading Him to Jambavan's dark cave. Entering alone, Krishna saw the child playing with the jewel. When He went to retrieve it, Jambavan challenged Him. A fierce battle ensued. They fought day and night for twenty-eight days using weapons, rocks, trees, and eventually their bare fists.</p>
+            
+            <p class="story-modal-paragraph">As Jambavan's strength began to fade, he realized that his opponent was none other than his beloved Lord, Sri Ramachandra, who had appeared as Sri Krishna. Jambavan fell at His feet and offered prayers of devotion, presenting the jewel and his daughter Jambavati to Krishna in marriage. Krishna returned to Dvaraka, summoned Satrajit, and returned the jewel. Stricken with shame and remorse, Satrajit begged for forgiveness and offered the hand of his daughter Satyabhama in marriage, along with the Syamantaka jewel, which Krishna graciously returned to him.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="js/main.js"></script>
