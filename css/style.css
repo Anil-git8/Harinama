@@ -628,20 +628,27 @@ a:hover { color: var(--brand-blue-light); }
   box-shadow: var(--shadow-lg);
 }
 
+a.kirtan-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+}
+
 /* ===== KIRTAN CARDS ===== */
 .kirtan-card {
   position: relative;
-  border-radius: var(--border-radius);
+  border-radius: 20px;
   overflow: hidden;
   background: var(--white);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(30, 150, 255, 0.08);
   transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(16, 44, 87, 0.04);
   cursor: pointer;
 }
 
 .kirtan-card .card-image {
   width: 100%;
-  aspect-ratio: 1/1;
+  aspect-ratio: 16/9;
   overflow: hidden;
   background: var(--gradient-card);
   display: flex;
@@ -670,12 +677,43 @@ a:hover { color: var(--brand-blue-light); }
 }
 
 .kirtan-card .play-overlay {
-  display: none !important;
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.kirtan-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.kirtan-card .play-btn-circle {
+  width: 58px;
+  height: 40px;
+  background: #FF0000;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.1rem;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+.kirtan-card:hover .play-btn-circle {
+  transform: scale(1.1);
 }
 
 .kirtan-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(16, 44, 87, 0.08);
+  border-color: rgba(30, 150, 255, 0.15);
 }
 
 .kirtan-card .card-info {
@@ -683,17 +721,20 @@ a:hover { color: var(--brand-blue-light); }
 }
 
 .kirtan-card .card-info h5 {
-  font-family: var(--font-heading);
-  color: var(--text-primary);
-  font-size: 1.05rem;
-  margin-bottom: 4px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  color: #102c57 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 6px;
+  font-weight: 600 !important;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .kirtan-card .card-info p {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-  font-weight: 300;
+  color: #647a9d !important;
+  font-size: 0.82rem !important;
+  font-weight: 400 !important;
+  margin-bottom: 0;
 }
 
 /* ===== CHANTING SECTION ===== */
@@ -1287,12 +1328,28 @@ a:hover { color: var(--brand-blue-light); }
 }
 
 @media(max-width: 767px) {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700 !important;
+  }
+  .brand-line-1 {
+    font-weight: 700 !important;
+  }
+  .navbar-custom .navbar-brand {
+    font-weight: 700 !important;
+  }
+  .hero-content .hero-line-two {
+    font-weight: 700 !important;
+  }
+  .btn-golden, .btn-outline-golden {
+    font-weight: 600 !important;
+  }
   .section-padding { padding: 54px 0; }
   .hero-content h1 { font-size: 2.8rem; }
   .navbar-custom .navbar-brand { font-size: 1rem; }
   .brand-logo { height: 32px !important; width: 32px !important; }
   .brand-line-1 { font-size: 0.95rem; }
   .brand-line-2 { font-size: 0.72rem; }
+
 
   .hero-buttons {
     flex-direction: column;
@@ -1378,7 +1435,7 @@ a:hover { color: var(--brand-blue-light); }
   }
 
   .kirtan-card .card-info h5 {
-    font-size: 0.92rem;
+    font-size: 0.92rem !important;
   }
 
   .chanting-circle {
