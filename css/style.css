@@ -1815,8 +1815,11 @@ p {
 .glass-card.text-center p,
 .mission-card p,
 .community-card p,
-.preloader-content p {
-  text-align: center;
+.preloader-content p,
+.hero-content .hero-sub,
+.page-header p,
+.chanting-hero p {
+  text-align: center !important;
 }
 
 /* Premium justification for long narrative columns on desktop */
