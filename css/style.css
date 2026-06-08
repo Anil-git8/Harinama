@@ -165,7 +165,7 @@ a:hover { color: var(--brand-blue-light); }
 
 /* ===== SECTION UTILITIES ===== */
 .section-padding {
-  padding: 90px 0;
+  padding: 70px 0;
 }
 
 .section-title {
@@ -336,7 +336,11 @@ a:hover { color: var(--brand-blue-light); }
   color: var(--white) !important;
 }
 .navbar-custom:not(.scrolled) .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+.navbar-custom:not(.scrolled) .navbar-toggler {
+  border: none !important;
+  background-color: transparent !important;
 }
 
 .navbar-custom.scrolled {
@@ -419,20 +423,21 @@ a:hover { color: var(--brand-blue-light); }
 }
 
 .navbar-custom .navbar-toggler {
-  border: 1px solid var(--violet-200);
-  background-color: var(--white);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
   padding: 6px 10px;
   border-radius: 8px;
   transition: var(--transition);
 }
 
 .navbar-custom .navbar-toggler:focus {
-  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.25);
-  outline: none;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .navbar-custom .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
   display: inline-block;
   width: 1.5em;
   height: 1.5em;
@@ -440,6 +445,15 @@ a:hover { color: var(--brand-blue-light); }
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
+}
+
+.navbar-custom.scrolled .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23102C57' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-custom.scrolled .navbar-toggler {
+  border: none !important;
+  background-color: transparent !important;
 }
 
 /* ===== HERO ===== */
@@ -501,17 +515,24 @@ a:hover { color: var(--brand-blue-light); }
 }
 
 /* ===== SCROLL DOWN INDICATOR ===== */
-.scroll-down-indicator {
+.scroll-down-indicator-wrapper {
   position: absolute;
   bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.scroll-down-indicator {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  z-index: 10;
   text-decoration: none !important;
+  pointer-events: auto;
 }
 
 .mouse-icon {
@@ -1283,7 +1304,7 @@ a.kirtan-link {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: var(--gradient-hero);
+  background: linear-gradient(180deg, #07162c 0%, #162E54 100%) !important;
   position: relative;
   padding-top: 80px;
   overflow: hidden;
@@ -1303,7 +1324,7 @@ a.kirtan-link {
 }
 
 .page-header h1 {
-  color: var(--text-primary);
+  color: var(--white) !important;
   margin-bottom: 16px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -1313,11 +1334,11 @@ a.kirtan-link {
 }
 
 .page-header h1 span {
-  color: var(--brand-blue) !important;
+  color: var(--brand-blue-light) !important;
 }
 
 .page-header p {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.8) !important;
   font-size: 1.05rem;
   max-width: 520px;
   margin: 0 auto;
@@ -1439,38 +1460,42 @@ a.kirtan-link {
 
 /* ===== RESPONSIVE ===== */
 @media(max-width: 1199px) {
-  .section-padding { padding: 80px 0; }
+  .section-padding { padding: 60px 0; }
 }
 
 @media(max-width: 991px) {
-  .section-padding { padding: 70px 0; }
+  .section-padding { padding: 50px 0; }
   .hero-content h1 { font-size: 3.25rem; }
   .navbar-custom { padding: 16px 16px; }
   .navbar-custom .navbar-brand { font-size: 1.15rem; }
   .navbar-custom .brand-text { gap: 3px; }
   .navbar-custom .navbar-toggler { margin-left: auto; }
-  .navbar-custom .navbar-brand { flex-wrap: wrap; }
+  .navbar-custom .navbar-brand { flex-wrap: nowrap; }
   .navbar-custom .brand-text { min-width: 0; }
   .brand-logo { height: 34px !important; width: 34px !important; }
   .brand-line-1 { font-size: 1.1rem; }
   .brand-line-2 { font-size: 1.1rem; }
 
   .navbar-custom .offcanvas {
-    background: var(--white) !important;
+    background: linear-gradient(180deg, #07162c 0%, #162E54 100%) !important;
     width: 280px !important;
-    border-left: 1px solid var(--violet-100) !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: var(--shadow-lg) !important;
   }
 
   .navbar-custom .offcanvas-header {
-    border-bottom: 1px solid var(--violet-50);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 20px 24px;
   }
 
   .navbar-custom .offcanvas-title {
     font-family: var(--font-heading);
-    color: var(--violet-900);
+    color: var(--white) !important;
     font-weight: 600;
+  }
+
+  .navbar-custom .offcanvas .btn-close {
+    filter: invert(1) grayscale(1) brightness(2);
   }
 
   .navbar-custom .offcanvas-body {
@@ -1487,13 +1512,13 @@ a.kirtan-link {
     font-size: 0.95rem;
     font-weight: 500;
     transition: var(--transition);
-    color: var(--text-secondary) !important;
+    color: rgba(255, 255, 255, 0.8) !important;
   }
 
   .navbar-custom .offcanvas .nav-link:hover,
   .navbar-custom .offcanvas .nav-link.active {
-    background: var(--violet-50) !important;
-    color: var(--violet-600) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--white) !important;
   }
 
   .navbar-custom .nav-link::after {
@@ -1534,7 +1559,7 @@ a.kirtan-link {
   .btn-golden, .btn-outline-golden {
     font-weight: 600 !important;
   }
-  .section-padding { padding: 54px 0; }
+  .section-padding { padding: 40px 0; }
   .hero-content h1 { font-size: 2.8rem; }
   .navbar-custom .navbar-brand { font-size: 1rem; }
   .brand-logo { height: 32px !important; width: 32px !important; }
@@ -1744,4 +1769,60 @@ a.kirtan-link {
 /* Adjust footer padding on chanting page to accommodate ticker */
 body.chanting-page {
   padding-bottom: 60px !important;
+}
+
+/* Custom navbar background color for chanting page only */
+.chanting-page .navbar-custom {
+  background: var(--violet-50) !important;
+  border-bottom: 1px solid rgba(30, 150, 255, 0.1) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.chanting-page .navbar-custom::before {
+  background: var(--violet-50) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(30, 150, 255, 0.1) !important;
+}
+
+.chanting-page .navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23102C57' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.chanting-page .navbar-custom .nav-link {
+  color: var(--text-secondary) !important;
+}
+
+.chanting-page .navbar-custom .nav-link:hover,
+.chanting-page .navbar-custom .nav-link.active {
+  color: var(--saffron-500) !important;
+}
+
+.chanting-page .navbar-custom .brand-line-1,
+.chanting-page .navbar-custom .brand-line-2 {
+  color: var(--text-primary) !important;
+}
+
+/* Fine-tune global paragraph line-height and alignment for readability */
+p {
+  line-height: 1.8 !important;
+  text-align: left;
+}
+
+/* Ensure centered elements are perfectly centered */
+.text-center p,
+.section-title p,
+.glass-card.text-center p,
+.mission-card p,
+.community-card p,
+.preloader-content p {
+  text-align: center;
+}
+
+/* Premium justification for long narrative columns on desktop */
+@media (min-width: 992px) {
+  .col-lg-6 p {
+    text-align: justify;
+    text-justify: inter-word;
+  }
 }
